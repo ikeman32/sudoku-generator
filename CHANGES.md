@@ -17,3 +17,6 @@ I know the formating of the console output is not very good looking at the momen
 ************
 **  Text  **
 ************
+
+# Need TODO
+The process is slow as hell need to make it faster some how maybe using the stack or using gpu to speed things up.
