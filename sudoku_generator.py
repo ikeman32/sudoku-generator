@@ -2,7 +2,7 @@
 from sys import argv
 from multiprocessing import Process
 from time import perf_counter
-from Sudoku.Generator import *
+from Sudoku.Generator import Generator
 
 # setting difficulties and their cutoffs for each solve method
 difficulties = {
