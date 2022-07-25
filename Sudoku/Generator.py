@@ -11,14 +11,15 @@ class Generator:
     def __init__(self, starting_file):
 
         # opening file
-        f = open(starting_file)
+        with open(starting_file) as f: 
+        # f = open(starting_file) # Original code
 
-        # reducing file to a list of numbers
-        numbers = filter(lambda x: x in '123456789', list(reduce(lambda x, y: x + y, f.readlines())))
-        numbers = list(map(int, numbers))
+            # reducing file to a list of numbers
+            numbers = filter(lambda x: x in '123456789', list(reduce(lambda x, y: x + y, f.readlines())))
+            numbers = list(map(int, numbers))
 
-        # closing file
-        f.close()
+        # # closing file
+        # f.close()
 
         # constructing board
         self.board = Board(numbers)

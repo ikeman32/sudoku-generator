@@ -76,9 +76,10 @@ class Board:
     def swap_row(self, row_index1, row_index2, allow=False):
         if allow or row_index1 // 3 == row_index2 // 3:
             for x in range(0, len(self.rows[row_index2])):
-                temp = self.rows[row_index1][x].value
-                self.rows[row_index1][x].value = self.rows[row_index2][x].value
-                self.rows[row_index2][x].value = temp
+                self.rows[row_index1][x].value, self.rows[row_index2][x].value = self.rows[row_index2][x].value, self.rows[row_index1][x].value
+                # temp = self.rows[row_index1][x].value
+                # self.rows[row_index1][x].value = self.rows[row_index2][x].value
+                # self.rows[row_index2][x].value = temp
         else:
             raise Exception('Tried to swap non-familial rows.')
 
@@ -86,9 +87,10 @@ class Board:
     def swap_column(self, col_index1, col_index2, allow=False):
         if allow or col_index1 // 3 == col_index2 // 3:
             for x in range(0, len(self.columns[col_index2])):
-                temp = self.columns[col_index1][x].value
-                self.columns[col_index1][x].value = self.columns[col_index2][x].value
-                self.columns[col_index2][x].value = temp
+                self.columns[col_index1][x].value, self.columns[col_index2][x].value = self.columns[col_index2][x].value, self.columns[col_index1][x].value
+                # temp = self.columns[col_index1][x].value
+                # self.columns[col_index1][x].value = self.columns[col_index2][x].value
+                # self.columns[col_index2][x].value = temp
         else:
             raise Exception('Tried to swap non-familial columns.')
 
@@ -113,6 +115,8 @@ class Board:
     # returns string representation
     def __str__(self):
         output = []
+        # For some reason index is required as it won't work without it
+        # Seems inefficient to me
         for index, row in self.rows.items():
             my_set = map(str, [x.value for x in row])
             new_set = []

@@ -10,5 +10,6 @@ class Cell:
 
     # returns a string representation of cell (for debugging)
     def __str__(self):
-        temp = (self.value, self.row, self.col, self.box)
-        return "Value: %d, Row: %d, Col: %d, Box: %d" % temp
+        return f"Value: {self.value}, Row: {self.row}, Col: {self.col}, Box: {self.box}"
+        # temp = (self.value, self.row, self.col, self.box)
+        # return "Value: %d, Row: %d, Col: %d, Box: %d" % temp
