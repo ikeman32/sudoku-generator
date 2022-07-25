@@ -76,7 +76,8 @@ class Board:
     def swap_row(self, row_index1, row_index2, allow=False):
         if allow or row_index1 // 3 == row_index2 // 3:
             for x in range(0, len(self.rows[row_index2])):
-                self.rows[row_index1][x].value, self.rows[row_index2][x].value = self.rows[row_index2][x].value, self.rows[row_index1][x].value
+                a, b = self.rows[row_index1][x].value, self.rows[row_index2][x].value
+                a, b = b, a
                 # temp = self.rows[row_index1][x].value
                 # self.rows[row_index1][x].value = self.rows[row_index2][x].value
                 # self.rows[row_index2][x].value = temp
@@ -87,7 +88,8 @@ class Board:
     def swap_column(self, col_index1, col_index2, allow=False):
         if allow or col_index1 // 3 == col_index2 // 3:
             for x in range(0, len(self.columns[col_index2])):
-                self.columns[col_index1][x].value, self.columns[col_index2][x].value = self.columns[col_index2][x].value, self.columns[col_index1][x].value
+                a, b = self.columns[col_index1][x].value, self.columns[col_index2][x].value
+                a, b = b, a
                 # temp = self.columns[col_index1][x].value
                 # self.columns[col_index1][x].value = self.columns[col_index2][x].value
                 # self.columns[col_index2][x].value = temp
