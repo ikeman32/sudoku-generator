@@ -1,7 +1,7 @@
 # !/usr/bin/python
-import sys
+from sys import argv
 from multiprocessing import Process
-import time
+from time import perf_counter
 from Sudoku.Generator import *
 
 # setting difficulties and their cutoffs for each solve method
@@ -24,7 +24,7 @@ def main():
     for n in range(numPuzzles):
 
         # getting desired difficulty from command line
-        difficulty = difficulties[sys.argv[2]]
+        difficulty = difficulties[argv[2]]
         
         if difficulty == (35, 0):
             dif = 'Easy'
@@ -36,7 +36,7 @@ def main():
             dif = 'Extreme'
 
         # constructing generator object from puzzle file (space delimited columns, line delimited rows)
-        gen = Generator(sys.argv[1])
+        gen = Generator(argv[1])
 
         # applying 100 random transformations to puzzle
         gen.randomize(100)
@@ -79,10 +79,10 @@ def main():
                 f.write('End of File')
 
 if __name__ == '__main__':
-    start_time = time.perf_counter()
+    start_time = perf_counter()
     # main()
     a = Process(target= main)
     a.start()
     a.join()
-    end_time = time.perf_counter()
+    end_time = perf_counter()
 print(f'Finished in: {end_time - start_time} seconds')

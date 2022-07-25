@@ -13,6 +13,8 @@ class Board:
         self.boxes = {}
         self.cells = []
 
+        # TODO:
+        # List comprehension maybe to make this more efficient?
         # looping rows
         for row in range(0, 9):
             # looping columns

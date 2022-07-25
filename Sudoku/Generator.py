@@ -1,4 +1,4 @@
-import random
+from random  import randint, shuffle
 from functools import reduce
 
 from Sudoku.Board import *
@@ -34,15 +34,15 @@ class Generator:
             for x in range(0, iterations):
 
                 # to get a random column/row
-                case = random.randint(0, 4)
+                case = randint(0, 4)
 
                 # to get a random band/stack
-                block = random.randint(0, 2) * 3
+                block = randint(0, 2) * 3
 
                 # in order to select which row and column we shuffle an array of
                 # indices and take both elements
                 options = list(range(0, 3))
-                random.shuffle(options)
+                shuffle(options)
                 piece1, piece2 = options[0], options[1]
 
                 # pick case according to random to do transformation
@@ -61,7 +61,7 @@ class Generator:
     # then we can remove that cell
     def reduce_via_logical(self, cutoff=81):
         cells = self.board.get_used_cells()
-        random.shuffle(cells)
+        shuffle(cells)
         for cell in cells:
             if len(self.board.get_possibles(cell)) == 1:
                 cell.value = 0
@@ -114,5 +114,7 @@ class Generator:
     # returns current state of generator including number of empty cells and a representation
     # of the puzzle
     def get_current_state(self):
-        template = "There are currently %d starting cells.\n\rCurrent puzzle state:\n\r\n\r%s\n\r"
-        return template % (len(self.board.get_used_cells()), self.board.__str__())
+        
+        return f"There are currently {len(self.board.get_used_cells())} starting cells.\n\rCurrent puzzle state:\n\r\n\r{self.board.__str__()}\n\r"
+        # template = "There are currently %d starting cells.\n\rCurrent puzzle state:\n\r\n\r%s\n\r"
+        # return template % (len(self.board.get_used_cells()), self.board.__str__())
