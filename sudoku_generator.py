@@ -4,12 +4,19 @@ from multiprocessing import Process
 from time import perf_counter
 from Sudoku.Generator import Generator
 
+# raise and Exception if no difficulty argument entered
+if argv == ['sudoku_generator.py']:
+    raise Exception(
+        'Please enter difficulty argument: easy, medium, hard, extreme, insane.'
+    )
+
 # setting difficulties and their cutoffs for each solve method
 difficulties = {
     'easy': (35, 0), 
     'medium': (81, 5), 
     'hard': (81, 10), 
-    'extreme': (81, 15)
+    'extreme': (81, 15),
+    'insane': (81, 20)
 }
 
 print('''\n\t\t\t\tSudoku Generator\n
@@ -20,11 +27,12 @@ print('''\n\t\t\t\tSudoku Generator\n
 
 # Get user to enter the number of puzzles to generate
 numPuzzles = int(input('\tHow many puzzles do you want: '))
+
 def main():
     for n in range(numPuzzles):
 
         # getting desired difficulty from command line
-        difficulty = difficulties[argv[2]]
+        difficulty = difficulties[argv[1]]
         
         if difficulty == (35, 0):
             dif = 'Easy'
@@ -32,11 +40,14 @@ def main():
             dif = 'Medium'
         elif difficulty == (81, 10):
             dif = 'Hard'
-        else:
+        elif difficulty == (81, 15):
             dif = 'Extreme'
+        else:
+            dif = 'Insane'
 
+        
         # constructing generator object from puzzle file (space delimited columns, line delimited rows)
-        gen = Generator(argv[1])
+        gen = Generator()
 
         # applying 100 random transformations to puzzle
         gen.randomize(100)
