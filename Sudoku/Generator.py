@@ -1,4 +1,4 @@
-from random  import randint, shuffle
+from random import randint, shuffle
 from functools import reduce
 
 from Sudoku.Board import *
@@ -8,19 +8,28 @@ from Sudoku.Solver import *
 class Generator:
 
     # constructor for generator, reads in a space delimited
-    def __init__(self, starting_file):
+    def __init__(self):
 
         # opening file
-        with open(starting_file) as f: 
-        # f = open(starting_file) # Original code
+        # with open(starting_file) as f:
+        #     # f = open(starting_file) # Original code
 
-            # reducing file to a list of numbers
-            numbers = filter(lambda x: x in '123456789', list(reduce(lambda x, y: x + y, f.readlines())))
-            numbers = list(map(int, numbers))
+        #     # reducing file to a list of numbers
+        #     numbers = filter(lambda x: x in '123456789', list(
+        #         reduce(lambda x, y: x + y, f.readlines())))
+        #     numbers = list(map(int, numbers))
 
         # # closing file
         # f.close()
-
+        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 
+            4, 5, 6, 7, 8, 9, 1, 2, 3, 
+            7, 8, 9, 1, 2, 3, 4, 5, 6, 
+            2, 1, 4, 3, 6, 5, 8, 9, 7, 
+            3, 6, 5, 8, 9, 7, 2, 1, 4, 
+            8, 9, 7, 2, 1, 4, 3, 6, 5, 
+            5, 3, 1, 6, 4, 2, 9, 7, 8, 
+            6, 4, 2, 9, 7, 8, 5, 3, 1, 
+            9, 7, 8, 5, 3, 1, 6, 4, 2]
         # constructing board
         self.board = Board(numbers)
 
@@ -55,7 +64,8 @@ class Generator:
                 elif case == 3:
                     self.board.swap_band(piece1, piece2)
         else:
-            raise Exception('Rearranging partial board may compromise uniqueness.')
+            raise Exception(
+                'Rearranging partial board may compromise uniqueness.')
 
     # method gets all possible values for a particular cell, if there is only one
     # then we can remove that cell
@@ -76,7 +86,8 @@ class Generator:
 
         # sorting used cells by density heuristic, highest to lowest
         new_set = [(x, self.board.get_density(x)) for x in existing]
-        elements = [x[0] for x in sorted(new_set, key=lambda x: x[1], reverse=True)]
+        elements = [x[0]
+                    for x in sorted(new_set, key=lambda x: x[1], reverse=True)]
 
         # for each cell in sorted list
         for cell in elements:
@@ -114,7 +125,7 @@ class Generator:
     # returns current state of generator including number of empty cells and a representation
     # of the puzzle
     def get_current_state(self):
-        
+
         return f"There are currently {len(self.board.get_used_cells())} starting cells.\n\rCurrent puzzle state:\n\r\n\r{self.board.__str__()}\n\r"
         # template = "There are currently %d starting cells.\n\rCurrent puzzle state:\n\r\n\r%s\n\r"
         # return template % (len(self.board.get_used_cells()), self.board.__str__())
